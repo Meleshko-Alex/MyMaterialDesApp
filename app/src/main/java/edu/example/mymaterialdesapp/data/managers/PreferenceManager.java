@@ -2,6 +2,7 @@ package edu.example.mymaterialdesapp.data.managers;
 
 
 import android.content.SharedPreferences;
+import android.net.Uri;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,5 +37,16 @@ public class PreferenceManager {
         userFields.add(mSharedPreferences.getString(ConstantManager.USER_GIT_KEY, "null"));
         userFields.add(mSharedPreferences.getString(ConstantManager.USER_BIO_KEY, "null"));
         return userFields;
+    }
+
+    public void saveUserPhoto(Uri uri){
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString(ConstantManager.USER_PHOTO_KEY, uri.toString());
+        editor.apply();
+    }
+
+    public Uri loadUserPhoto(){
+        return Uri.parse(mSharedPreferences.getString(ConstantManager.USER_PHOTO_KEY,
+                "android.resource://edu.example.mymaterialdesapp/drawable/default_img"));
     }
 }
